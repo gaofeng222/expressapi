@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+</head>
+<body>
+   <button id="getBtn">GET</button>
+   <button id="postBtn">POST</button>
+   <button id="delBtn">DELETE</button>
+   <button id="jsonpBtn">JSONP</button>
+
+  <script>
+       $(function(){
+           const btnGet = $('#getBtn');
+           const btnPost = $('#postBtn');
+           const delBtn = $('#delBtn');
+           const jsonpBtn = $('#jsonpBtn');
+           btnGet.click(function(){
+              console.log('哈哈哈')
+              $.ajax({
+                type:"GET",
+                url:"http://127.0.0.1:4444/api/get",
+                data:{
+                  name:'sa',
+                  age:20
+                },
+                success(res){
+                  console.log("🚀 ~ success ~ res:", res)
+                }
+              })
+           })
+           btnPost.click(function(){
+              console.log('哈哈哈')
+              $.ajax({
+                type:"POST",
+                url:"http://127.0.0.1:4444/api/post",
+                data:{
+                  name:'lulu',
+                  age:18
+                },
+                success(res){
+                  console.log("🚀 ~ success ~ res:", res)
+                }
+              })
+           })
+           delBtn.click(function(){
+            $.ajax({
+              type:'DELETE',
+              url:'http://127.0.0.1:4444/api/delete',
+              success(res){
+                  console.log("🚀 ~ success ~ res:", res)
+                }
+            })
+           })
+           jsonpBtn.click(function(){
+            $.ajax({
+              url:'http://127.0.0.1:4444/api/jsonp?cabllbacb=cb',
+              dataType:'jsonp',
+              success(res){
+                  console.log("🚀 ~ success ~ res:", res)
+                }
+            })
+           })
+       })
+  </script>
+</body>
+</html>

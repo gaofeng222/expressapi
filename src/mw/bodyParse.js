@@ -8,6 +8,7 @@ function bdParse(req, res, next) {
 
   req.on("end", () => {
     const body = qs.parse(str);
+
     req.body = body;
     next();
   });
