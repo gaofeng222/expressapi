@@ -13,20 +13,6 @@ app.use(express.static("public"));
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
 
-//jsonp接口,必须在cors配置之前
-
-app.use("/api/jsonp", (req, res) => {
-  // TODO
-  const fnName = req.query.callback;
-  const data = {
-    name: "李世明",
-    age: 150,
-    gender: "男",
-  };
-  const sData = `${fnName}(${JSON.stringify(data)})`;
-  res.send(sData);
-});
-
 //跨域资源共享
 app.use(cors());
 app.use("/api", userRouter);

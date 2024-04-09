@@ -694,43 +694,44 @@
     <user id="207" parent="1" name="root">
       <Host>localhost</Host>
     </user>
-    <table id="208" parent="2" name="country"/>
-    <table id="209" parent="3" name="tb_user"/>
-    <column id="210" parent="208" name="id">
+    <table id="208" parent="3" name="tb_users">
+      <Comment>用户信息表</Comment>
+    </table>
+    <column id="209" parent="208" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>null</SequenceIdentity>
     </column>
-    <column id="211" parent="208" name="countryName">
+    <column id="210" parent="208" name="username">
       <Position>2</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(20)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="212" parent="208" name="countryCode">
+    <column id="211" parent="208" name="password">
       <Position>3</Position>
-      <DataType>varchar(255)|0s</DataType>
+      <DataType>varchar(50)|0s</DataType>
       <NotNull>1</NotNull>
     </column>
-    <key id="213" parent="208" name="PRIMARY">
+    <column id="212" parent="208" name="status">
+      <Position>4</Position>
+      <DataType>tinyint(1)|0s</DataType>
+      <NotNull>1</NotNull>
+      <DefaultExpression>0</DefaultExpression>
+    </column>
+    <index id="213" parent="208" name="tb_users_id_uindex">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+      <Type>btree</Type>
+    </index>
+    <key id="214" parent="208" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="214" parent="209" name="username">
-      <Position>1</Position>
-      <DataType>varchar(50)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <column id="215" parent="209" name="password">
-      <Position>2</Position>
-      <DataType>varchar(100)|0s</DataType>
-      <NotNull>1</NotNull>
-    </column>
-    <key id="216" parent="209" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>username</ColNames>
-      <Primary>1</Primary>
+    <key id="215" parent="208" name="tb_users_id_uindex">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>tb_users_id_uindex</UnderlyingIndexName>
     </key>
   </database-model>
 </dataSource>
