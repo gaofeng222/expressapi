@@ -1,10 +1,12 @@
 const express = require("express");
 const userRouter = require("./router/user");
+const bookRouter = require("./router/book");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const app = express();
-const session = require("express-session");
+const { expressjwt } = require("express-jwt");
+const jwtConfig = require("./config/index");
 
 app.use(express.static("public"));
 //ejs模版的必须配置
@@ -13,23 +15,33 @@ app.use(express.static("public"));
 //解析请求体参数
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
-
-//配置session中间件
+//jwt中间件
+//安装的express-jwt模块会默认为最新版本，更新后的jwt需要在配置中加入algorithms属性，即设置jwt的算法。一般HS256为配置algorithms的默认值。
 app.use(
-  session({
-    secret: "gaofeng", //任意字符串
-    resave: false, //固定写法
-    saveUninitialized: true, //固定写法
+  expressjwt({ secret: jwtConfig.jwtSecret, algorithms: ["HS256"] }).unless({
+    path: [/^\/api\//],
   })
 );
 
 //跨域资源共享
 app.use(cors());
 app.use("/api", userRouter);
+app.use("/book", bookRouter);
 
 //错误级别的中间件
 app.use((err, req, res, next) => {
-  res.send("Error! " + err.message);
+  console.log("🚀 ~ app.use ~ err:", err);
+  //token解析失败
+  if (err.name === "UnauthorizedError") {
+    return res.send({
+      status: 401,
+      message: "无效的token",
+    });
+  }
+  res.send({
+    status: 500,
+    message: "服务端错误",
+  });
 });
 
 app.listen(4444, () => {

@@ -719,17 +719,29 @@
       <NotNull>1</NotNull>
       <DefaultExpression>0</DefaultExpression>
     </column>
-    <index id="213" parent="208" name="tb_users_id_uindex">
+    <column id="213" parent="208" name="nickname">
+      <Position>5</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="214" parent="208" name="email">
+      <Position>6</Position>
+      <DataType>varchar(50)|0s</DataType>
+    </column>
+    <column id="215" parent="208" name="user_pic">
+      <Position>7</Position>
+      <DataType>text|0s</DataType>
+    </column>
+    <index id="216" parent="208" name="tb_users_id_uindex">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
       <Type>btree</Type>
     </index>
-    <key id="214" parent="208" name="PRIMARY">
+    <key id="217" parent="208" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="215" parent="208" name="tb_users_id_uindex">
+    <key id="218" parent="208" name="tb_users_id_uindex">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>tb_users_id_uindex</UnderlyingIndexName>
     </key>
