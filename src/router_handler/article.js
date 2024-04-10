@@ -72,9 +72,44 @@ const getArtCateById = (req, res) => {
   });
 };
 
+//根据id更新文章分类
+const updateArticleCate = (req, res) => {
+  //查询不是当前id的数据，name和alias是不是存在，不能重复
+  const sql =
+    "select * from tb_article_cate where id <>? and (name=? or alias=?)";
+  const sqlUpdate = "update tb_article_cate set ? where id = ?";
+  const cateInfo = req.body;
+  const { id, name, alias } = cateInfo;
+  db.query(sql, [id, name, alias], (err, data) => {
+    if (err) return res.fnCb(err);
+    if (
+      data.length === 2 ||
+      (data.length === 1 &&
+        data[0].name === req.body.name &&
+        data[0].alias === req.body.alias)
+    ) {
+      return res.fnCb("分类名和别名被占用，请更换后重试!");
+    }
+    if (data.length === 1 && data[0].name === req.body.name) {
+      return res.fnCb("分类名被占用，请更换后重试!");
+    }
+    if (data.length === 1 && data[0].alias === req.body.alias) {
+      return res.fnCb("别名被占用，请更换后重试!");
+    }
+    db.query(sqlUpdate, [cateInfo, id], (err, data) => {
+      if (err) return res.fnCb(err);
+      if (data.affectedRows !== 1) {
+        return res.fnCb("更新文章分类失败，请重新再试");
+      }
+      res.fnCb("更新文章分类成功！", 0);
+    });
+  });
+};
+
 module.exports = {
   getArticleCates,
   addArticleCates,
   deleteCate,
   getArtCateById,
+  updateArticleCate,
 };

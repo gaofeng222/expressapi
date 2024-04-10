@@ -22,4 +22,10 @@ router.get(
   articleHandler.getArtCateById
 );
 
+router.post(
+  "/updateArtCateById",
+  expressJoi(schema.updateCateSchema),
+  articleHandler.updateArticleCate
+);
+
 module.exports = router;

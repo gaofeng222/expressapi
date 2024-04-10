@@ -18,8 +18,17 @@ const getCateSchema = {
   },
 };
 
+const updateCateSchema = {
+  body: {
+    id,
+    name,
+    alias,
+  },
+};
+
 module.exports = {
   articleSchema,
   deleteCateSchema,
   getCateSchema,
+  updateCateSchema,
 };
