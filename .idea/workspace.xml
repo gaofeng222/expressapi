@@ -8,6 +8,9 @@
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/app.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/router/user.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/router/user.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uploads/filelist_1712656760369.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uploads/filelist_1712656760370.jpg" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/uploads/myFile_1712656532014.webp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -45,6 +48,7 @@
       <workItem from="1712564234064" duration="90000" />
       <workItem from="1712564421118" duration="2012000" />
       <workItem from="1712626109480" duration="6041000" />
+      <workItem from="1712711786266" duration="2561000" />
     </task>
     <servers />
   </component>

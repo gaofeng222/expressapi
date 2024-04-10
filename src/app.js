@@ -1,18 +1,17 @@
 const express = require("express");
 const userRouter = require("./router/user");
-const bookRouter = require("./router/book");
+const myRouter = require("./router/userInfo");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
 const app = express();
 const { expressjwt } = require("express-jwt");
 const jwtConfig = require("./config/index");
+const responseMd = require("./mw/response");
+const Joi = require("joi");
 
 app.use(express.static("public"));
 app.use("/images", express.static(path.join(__dirname, "uploads")));
-//ejs模版的必须配置
-// app.set("view engine", "ejs");
-// app.set("views", path.join(__dirname, "views"));
 //解析请求体参数
 app.use(bodyParser.json());
 app.use(express.urlencoded({ extended: false }));
@@ -23,11 +22,13 @@ app.use(
     path: [/^\/(api|images)\/| /],
   })
 );
+//返回数据的中间件
+app.use(responseMd);
 
 //跨域资源共享
 app.use(cors());
 app.use("/api", userRouter);
-app.use("/book", bookRouter);
+app.use("/my", myRouter);
 
 //错误级别的中间件
 app.use((err, req, res, next) => {
@@ -35,13 +36,19 @@ app.use((err, req, res, next) => {
   //token解析失败
   if (err.name === "UnauthorizedError") {
     return res.send({
-      status: 401,
       message: "无效的token",
+      status: 401,
+    });
+  }
+  if (err instanceof Joi.ValidationError) {
+    return res.send({
+      status: 1,
+      message: err.message,
     });
   }
   res.send({
-    status: 500,
     message: "服务端错误",
+    status: 500,
   });
 });
 
