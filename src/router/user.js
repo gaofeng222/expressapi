@@ -6,8 +6,6 @@ const path = require("path");
 const jwtConfig = require("../config/index");
 const schema = require("../schema/user");
 const userHandler = require("../router_handler/user");
-// 导入 Joi 来定义验证规则
-const Joi = require("joi");
 // 1. 导入 @escook/express-joi
 const expressJoi = require("@escook/express-joi");
 
