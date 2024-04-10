@@ -1,6 +1,7 @@
 const express = require("express");
 const userRouter = require("./router/user");
 const myRouter = require("./router/userInfo");
+const articleRouter = require("./router/artcle");
 const bodyParser = require("body-parser");
 const path = require("path");
 const cors = require("cors");
@@ -29,6 +30,7 @@ app.use(responseMd);
 app.use(cors());
 app.use("/api", userRouter);
 app.use("/my", myRouter);
+app.use("/my/article", articleRouter);
 
 //错误级别的中间件
 app.use((err, req, res, next) => {
