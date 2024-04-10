@@ -2,7 +2,6 @@ const db = require("../db/index");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const jwtConfig = require("../config/index");
-console.log("🚀 ~ jwt:", jwt);
 /**
  * 检测表单数据是否合法
  * 检测用户名否存在
@@ -59,12 +58,13 @@ const login = (req, res) => {
     if (err) return res.fnCb(err);
     if (data.length !== 1) return res.fnCb("登录失败");
     //判断用户输入的密码是否一致
+    console.log("🚀 ~ db.query ~ data:", data);
     const isPwd = bcrypt.compareSync(password, data[0].password);
     if (!isPwd) return res.fnCb("密码有误！登录失败");
     //在服务端生成token
     const userInfo = { ...data[0], password: "", usr_pic: "" };
     console.log("🚀 ~ db.query ~ userInfo:", userInfo);
-    const token = jwt.sign(userInfo, jwtConfig.jwtSecret, { expiresIn: "1h" });
+    const token = jwt.sign(userInfo, jwtConfig.jwtSecret, { expiresIn: "10h" });
     res.send({
       status: 0,
       message: "登录成功",

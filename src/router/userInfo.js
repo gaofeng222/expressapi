@@ -12,4 +12,18 @@ router.post(
   userInfoHandler.updateUserInfo
 );
 
+//重置密码
+router.post(
+  "/updatePwd",
+  expressJoi(schema.updatePwdSchema),
+  userInfoHandler.updatePwd
+);
+
+//更换头像
+router.post(
+  "/update/avatar",
+  expressJoi(schema.avatarSchema),
+  userInfoHandler.updateAvatar
+);
+
 module.exports = router;
