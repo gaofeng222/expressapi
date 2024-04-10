@@ -9,6 +9,7 @@ const { expressjwt } = require("express-jwt");
 const jwtConfig = require("./config/index");
 
 app.use(express.static("public"));
+app.use("/images", express.static(path.join(__dirname, "uploads")));
 //ejs模版的必须配置
 // app.set("view engine", "ejs");
 // app.set("views", path.join(__dirname, "views"));
@@ -19,7 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 //安装的express-jwt模块会默认为最新版本，更新后的jwt需要在配置中加入algorithms属性，即设置jwt的算法。一般HS256为配置algorithms的默认值。
 app.use(
   expressjwt({ secret: jwtConfig.jwtSecret, algorithms: ["HS256"] }).unless({
-    path: [/^\/api\//],
+    path: [/^\/(api|images)\/| /],
   })
 );
 
