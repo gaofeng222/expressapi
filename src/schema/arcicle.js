@@ -26,6 +26,16 @@ const updateCateSchema = {
   },
 };
 
+// const addArticleSchema = {
+//   body: {
+//     title,
+//     content,
+//     cate_id,
+//     cover_img,
+//     state,
+//   },
+// };
+
 module.exports = {
   articleSchema,
   deleteCateSchema,

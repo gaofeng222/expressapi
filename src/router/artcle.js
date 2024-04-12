@@ -28,4 +28,10 @@ router.post(
   articleHandler.updateArticleCate
 );
 
+router.post(
+  "/addArticle",
+  // expressJoi(schema.addArticleSchema),
+  articleHandler.addArticle
+);
+
 module.exports = router;

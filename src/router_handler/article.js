@@ -106,10 +106,24 @@ const updateArticleCate = (req, res) => {
   });
 };
 
+const addArticle = (req, res) => {
+  const sql = "insert into tb_articles set ?";
+  const data = res.body;
+  db.query(sql, data, (err, data) => {
+    console.log("🚀 ~ db.query ~ err:", err);
+    if (err) return res.fnCb(err);
+    if (data.affectedRows !== 1) {
+      return res.fnCb("发布文章分类失败，请重新再试");
+    }
+    res.fnCb("发布文章成功！", 0);
+  });
+};
+
 module.exports = {
   getArticleCates,
   addArticleCates,
   deleteCate,
   getArtCateById,
   updateArticleCate,
+  addArticle,
 };
